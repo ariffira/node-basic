@@ -19,9 +19,10 @@ const server = httpModule.createServer(function (request, response) {
     //sending response body data as Stream Body
     //First module
     response.write('Data from my module:<h1>' + myModuleData.myModule() + '</h1>');
+    response.write('<h1>My Name as String: ' + myModuleData.myName + '</h1>');
 
     // date module
-    response.write('Data from Date module:<h1>' + dateModule.dateTime() + '</h1>');
+    response.write('Data from Date module:<h1>' +  dateModule.dateTime() + '</h1>');
 
     // check url after localhost
     response.write('<h2>The Url I am using is ' + request.url + '</h2>');
@@ -33,7 +34,7 @@ const server = httpModule.createServer(function (request, response) {
     response.write(fileModule.fileUpdate());
 
     // Rename file
-    response.write(fileModule.fileRename());
+    //response.write(fileModule.fileRename());
 
     // Delete File
     // response.write(fileModule.fileDelete());
