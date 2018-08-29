@@ -4,8 +4,13 @@ const express = require('express');
 const app = express();
 const myRoutes = require('./routes/myRoutes.js');
 
+// express static folder for assets (css, images, js, libs and uploads)
+app.use(express.static(__dirname + '/public'));
+
 // create a get routes for '/' with arrow function
-app.get('/', (req, res) => res.send('Welcome to ExpressJS....!'));
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html');
+});
 
 // another route without arrow function localhost:3000/test
 app.get('/test', function(req, res){
