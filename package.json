@@ -9,6 +9,7 @@
     "app": "nodemon app.js"
   },
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "*"
   },
   "repository": {

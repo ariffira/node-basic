@@ -3,7 +3,8 @@ var router = express.Router();
 
 // Contact routes
 router.get('/contact', function(req, res){
-    res.send("<h1>Contact Us</h1>");
+    // res.sendFile('index.html', { root: 'views/'});
+    res.render('index.html');
 });
 
 // dashboard routes

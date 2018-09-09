@@ -2,10 +2,16 @@
 const express = require('express');
 // use express function to app variable. express() is a top-level function exported by the express module
 const app = express();
+const path = require('path');
 const myRoutes = require('./routes/myRoutes.js');
 
 // express static folder for assets (css, images, js, libs and uploads)
 app.use(express.static(__dirname + '/public'));
+
+// setting ejs template engine for html file
+// all file inside views folder with html extension can be use
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 // create a get routes for '/' with arrow function
 app.get('/', (req, res) => {
