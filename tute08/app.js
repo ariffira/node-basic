@@ -4,9 +4,33 @@ const bodyParser = require('body-parser');
 const app = express();
 // include express handlebar module
 const exphbs  = require('express-handlebars');
-const path = require("path")
+const path = require("path");
+
+//file system
+const fs = require('fs');
 var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./userData');
+
+const multer = require('multer');
+// setting storage
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'upload/')
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname + Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({ storage: storage });
+/*
+const upload = multer({
+    dest: 'upload/',
+    filename: function (req, file, callback) {
+        callback(null, file.originalname);
+    }
+});
+*/
 
 // This is config for render view in `views` folder
 // and use handlebars as template engine here
@@ -62,6 +86,54 @@ app.post('/signin', (req, res)=> {
 // homepage routes after login
 app.get('/home', (req, res)=> {
     res.render('home')
+});
+
+// file upload
+/*app.post('/upload', upload.single('my-pic'), (req, res) => {
+    // get temporary file path or destination
+    const tempPath = req.file.path;
+    console.log(tempPath) // check where file uploads
+
+    // target path to upload with full path of server or localstorage
+    const targetPath = path.join(__dirname, "upload/images");
+    console.log(targetPath)
+
+    //check uploaded file original name
+    console.log(req.file.originalname)
+
+    // check file extension name
+    const uploadedFileExt = path.extname(req.file.originalname).toLowerCase();
+    console.log(uploadedFileExt);
+
+    // rename only jpg file else delete from temporary uploads/
+    if (uploadedFileExt === '.jpg') {
+        //rename file name using target path
+        fs.rename(tempPath, targetPath, (err, res)=> {
+            if (err) throw err;
+            res.status(200);
+            res.contentType("text/plain")
+            res.end("File uploaded successfully........");
+        });
+    } else {
+        fs.unlink(tempPath, err => {
+            if (err) throw err;
+            res.status(403);
+            res.contentType("text/plain")
+            res.end("Please upload only JPG file");
+        });
+    }
+
+    res.redirect('/profile');
+});*/
+
+
+app.post('/upload', upload.single('my-pic'), function (req, res) {
+   res.redirect('/profile');
+})
+
+// profile route
+app.get('/profile', (req, res)=> {
+    res.render('profile')
 });
 
 app.listen(3000, () => console.info('Application running on port 3000'));
