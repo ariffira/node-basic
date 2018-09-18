@@ -11,7 +11,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "express": "*"
+    "express": "*",
+    "nodemailer": "^4.6.8"
   },
   "repository": {
     "type": "git",
