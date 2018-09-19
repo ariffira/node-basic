@@ -158,11 +158,15 @@ const mailOptions = {
     html: '<p>Hello ariful....</p>'// plain text body
 };
 
-transporter.sendMail(mailOptions, function (err, info) {
-    if(err)
-        console.log(err)
-    else
-        console.log(info);
+// send email onclick button
+app.get('/sendMail', (req, res) => {
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+            console.log(err)
+        else
+            console.log(info);
+    });
+    res.send('Email sent')
 });
 
 app.listen(3000, () => console.info('Application running on port 3000'));
