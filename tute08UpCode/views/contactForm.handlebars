@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="col-md-6">
+      <form action="/sendEmail" method="post">
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" class="form-control" name="emailFrom" placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+          <label>Subject:</label>
+          <input type="text" class="form-control" name="emailSubject">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea class="form-control" name="emailBody" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success" type="submit">Send Email</button>
+        </div>
+      </form>
+    </div>
+</div>
