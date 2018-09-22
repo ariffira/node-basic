@@ -6,7 +6,8 @@ const expHbs = require("express-handlebars");
 const path = require("path");
 const fs = require("fs");
 const nodemailer = require("nodemailer");
-
+// add mongoose package
+const mongoose = require('mongoose');
 /* 
   multer: is a middleware or js library which can take multipart form data like image, pdf,doc
  */
@@ -21,12 +22,14 @@ const storage = multer.diskStorage({
   filename: function(req, file, callback) {
     callback(null, Date.now() + file.originalname);
   }
-}); 
-
+});
 const upload = multer({ storage: storage });
-
+// local storage setup
 const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage('./userData');
+
+// connect mongoose using localhost
+mongoose.connect('mongodb://localhost/tute11');
 
 // set the template engine views
 app.set('views', path.join(__dirname + '/views'));
@@ -54,13 +57,37 @@ app.get('/registration', (req, res)=> {
   res.render('registration', { pageTitle: "Registration page"});
 });
 
-// posting resgitration form data to save
+/*// posting resgitration form data to save in localstorage
 app.post('/registration', (req, res) => {
   let postData = req.body;
   console.log(postData);
   // save data to local storage
   localStorage.setItem('user', JSON.stringify(postData));
   res.redirect('/signin');
+});*/
+
+// add model user
+const User = require('./models/user');
+
+// posting resgitration form data to save in MongoDB
+app.post('/registration', (req, res) => {
+    let postData = req.body;
+    console.log(postData);
+    // create a new user object as like your user schema
+    let newUser = new User({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: req.body.password,
+        createdAt: Date.now()
+    });
+
+    // Save the user to database
+    newUser.save(err => {
+        if(err) throw err;
+        console.log('A new User Saved to Database!');
+    });
+    res.redirect('/signin');
 });
 
 // show sign in form
