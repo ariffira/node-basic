@@ -28,6 +28,8 @@ const upload = multer({ storage: storage });
 const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage('./userData');
 
+const bcrypt = require('bcryptjs');
+
 // connect mongoose using localhost
 mongoose.connect('mongodb://localhost/tute11');
 
@@ -82,10 +84,24 @@ app.post('/registration', (req, res) => {
         createdAt: Date.now()
     });
 
-    // Save the user to database
+/*    // Save the user to database
     newUser.save(err => {
         if(err) throw err;
         console.log('A new User Saved to Database!');
+    });*/
+
+    // Save user data using bcryptjs
+    const saltRounds = 5;
+    // encrypt password first using salt
+    bcrypt.hash(newUser.password, saltRounds, (err, hash) => {
+        if(err) throw err;
+        // make hash as your new password
+        newUser.password = hash;
+        // save all data to DB now
+        newUser.save(err => {
+            if(err) throw err;
+            console.log('A new User Saved to Database using Hash!');
+        });
     });
     res.redirect('/signin');
 });
