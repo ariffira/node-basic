@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "*",
+    "mongoose": "^5.2.17",
     "nodemailer": "^4.6.8"
   },
   "repository": {

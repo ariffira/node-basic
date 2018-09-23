@@ -28,8 +28,6 @@ const upload = multer({ storage: storage });
 const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage('./userData');
 
-const bcrypt = require('bcryptjs');
-
 // connect mongoose using localhost
 mongoose.connect('mongodb://localhost/tute11');
 
@@ -90,20 +88,18 @@ app.post('/registration', (req, res) => {
         console.log('A new User Saved to Database!');
     });*/
 
-    // Save user data using bcryptjs
-    const saltRounds = 5;
-    // encrypt password first using salt
-    bcrypt.hash(newUser.password, saltRounds, (err, hash) => {
-        if(err) throw err;
-        // make hash as your new password
-        newUser.password = hash;
-        // save all data to DB now
-        newUser.save(err => {
-            if(err) throw err;
-            console.log('A new User Saved to Database using Hash!');
-        });
+    // create new user and save data to DB
+    User.addUser(newUser, (err, user) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: 'Failed to register...'
+            });
+        }
+        else {
+            res.redirect('/signin');
+        }
     });
-    res.redirect('/signin');
 });
 
 // show sign in form
@@ -117,10 +113,12 @@ app.post('/signin', (req, res)=> {
   console.log(postData.email);
   let emailFromBody = postData.email;
   let passFromBody = postData.password;
-  // get data from storage
+
+/*  // get data from storage
   const userDataFromStore = JSON.parse(localStorage.getItem('user'));
   let firstname = userDataFromStore.firstname;
-  console.log(userDataFromStore.email);
+  console.log(userDataFromStore.email);*/
+
   let emailFromDB = userDataFromStore.email;
   let passFromDB = userDataFromStore.password;
   if((emailFromBody == emailFromDB) && (passFromBody === passFromDB)){
