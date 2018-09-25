@@ -1,6 +1,11 @@
 <h1>{{title}}</h1>
-<p>My CRUD MEN APP</p>
-<form action="/addUser" method="post">
-    Give User Name: <input type="text" name="username">
-    <button type="submit">Add User</button>
+<p>My CRUDMEN TODO APP</p>
+
+<a href="/todos/list"> List</a>
+<br><hr>
+<form action="/todos/addTodo" method="post">
+    What to do? <input type="text" name="todo">
+    <button type="submit"> + TODO</button>
 </form>
+
+<p id="todoList"></p>

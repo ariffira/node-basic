@@ -1,0 +1,13 @@
+<h1>List of Todos</h1>
+<a href="/"> Home</a>
+<br><hr>
+<ul>
+    {{#each todos}}
+    <li>
+        Todo number {{@index}} : {{todo}} <a href="/todos/detail/{{_id}}">Detail||</a>
+        <a href="/todos/update/{{_id}}">Update||</a>
+        <a href="/todos/delete/{{_id}}">Delete||</a>
+    </li>
+    {{/each}}
+</ul>
+

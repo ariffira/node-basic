@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const todosRouter = require('./routes/todos');
+
 
 var app = express();
 
@@ -13,12 +15,12 @@ var app = express();
 const mongoose = require('mongoose');
 
 // connect mongoose using localhost
-mongoose.connect('mongodb://localhost/crudmen');
+// mongoose.connect('mongodb://localhost/crudmen');
 
 /* if use mlab
   then use below code with iser and password
  */
-// mongoose.connect('mongodb://ariful:creativeF1RA@ds113443.mlab.com:13443/crudmen');
+mongoose.connect('mongodb://ariful:creativeF1RA@ds113443.mlab.com:13443/crudmen');
 
 // body parser for form
 const bodyParser = require("body-parser");
@@ -37,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/todos', todosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

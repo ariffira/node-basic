@@ -1,0 +1,10 @@
+<h1>Update of This Todo</h1>
+<a href="/"> Home||</a>
+<a href="/todos/list"> Todos</a>
+<br><hr>
+
+<form action="/todos/update" method="post">
+    <input type="hidden" name="id" value="{{todo._id}}">
+    Todo: <input type="text" name="todo" value="{{todo.todo}}"><br>
+    <button type="submit"> Update</button>
+</form>
