@@ -15,12 +15,12 @@ var app = express();
 const mongoose = require('mongoose');
 
 // connect mongoose using localhost
-// mongoose.connect('mongodb://localhost/crudmen');
+mongoose.connect('mongodb://localhost/crudmen');
 
 /* if use mlab
   then use below code with iser and password
  */
-mongoose.connect('mongodb://ariful:creativeF1RA@ds113443.mlab.com:13443/crudmen');
+// mongoose.connect('mongodb://ariful:creativeF1RA@ds113443.mlab.com:13443/crudmen');
 
 // body parser for form
 const bodyParser = require("body-parser");
