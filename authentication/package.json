@@ -11,10 +11,12 @@
   "author": "arif",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "*",
     "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
+    "hbs": "*",
     "mongoose": "*",
     "passport": "*",
     "passport-facebook": "*",

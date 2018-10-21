@@ -1,25 +1,30 @@
 const express = require("express");
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 const bodyParser = require("body-parser");
-//const pug = require("pug");
+const hbs = require("hbs");
 const path = require("path");
 
 // add mongoose package
 const mongoose = require('mongoose');
-// add model user
-//const User = require('./models/user');
+
+/**
+ * all models add here
+ */
+const User = require('./models/user');
 
 // connect mongoose using localhost
 mongoose.connect('mongodb://localhost/authTest');
 
-// set the template engine views
-app.set('views', path.join(__dirname + '/views'));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+/**
+ * All use of middleware add here
+ */
 // set public folder for static files css, images
 app.use(express.static(__dirname + '/public'));
-
-// set template engine
-//app.set('view engine', 'pug')
 
 // using body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,10 +48,61 @@ passport.deserializeUser(function(id, cb) {
     });
 });
 
+/**
+ * All routes
+ */
+// registration form route
+app.get('/', (req, res) => {
+    res.render('registration', { pageTitle: 'registration page'});
+});
 
-app.get('/', (req, res) => res.sendFile('auth.html', { root : __dirname}));
+// posting resgitration form data to save in MongoDB
+app.post('/registration', (req, res) => {
+    // create a new user object as like your user schema
+    let newUser = new User({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: req.body.password,
+        createdAt: Date.now()
+    });
 
+    // Save the user to database
+    newUser.save(err => {
+        if(err) throw err;
+        console.log('A new User Saved to Database!');
+        res.redirect('/signin');
+    });
+});
 
+// show sign in form
+app.get('/signin', (req, res)=> {
+  res.render('signin', { pageTitle: "Sign-in page"});
+});
+
+// post signin data and give access
+app.post('/signin', (req, res)=> {
+  let email = req.body.email;
+  let password = req.body.password;
+  // find user by this email
+  let query = { email: email };
+  User.findOne(query, (err, user)=> {
+      if(err) throw err;
+      if((email == user.email) && (password === user.password)){
+        res.redirect('/homepage');
+      }
+      else {
+        res.redirect('/signin');
+      }
+    });
+});
+
+// homepage after successful signin
+app.get('/homepage', (req, res)=> {
+    res.send('You have access!');
+});
+
+// listen the server 
 app.listen(PORT, ()=> {
     console.log("Server is running on port number" + PORT);
 });
