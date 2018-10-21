@@ -4,6 +4,8 @@ const PORT = process.env.PORT || 5001;
 const bodyParser = require("body-parser");
 const path = require("path");
 const session = require('express-session');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 
 // add mongoose package
 const mongoose = require('mongoose');
@@ -46,6 +48,36 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Express Validator
+app.use(expressValidator({
+errorFormatter: function(param, msg, value) {
+    var namespace = param.split('.')
+    , root    = namespace.shift()
+    , formParam = root;
+
+    while(namespace.length) {
+    formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+    param : formParam,
+    msg   : msg,
+    value : value
+    };
+}
+}));
+
+// Connect Flash
+app.use(flash());
+
+// Global Vars
+app.use(function (req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+    next();
+});
+
 /**
  * All routes
  */
@@ -56,21 +88,36 @@ app.get('/', (req, res) => {
 
 // posting resgitration form data to save in MongoDB
 app.post('/registration', (req, res) => {
-    // create a new user object as like your user schema
-    let newUser = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: req.body.password,
-        createdAt: Date.now()
-    });
+    //validate user data
+	req.checkBody('firstname', 'First Name is required').notEmpty();
+	req.checkBody('lastname', 'Last Name is required').notEmpty();
+	req.checkBody('email', 'Email is not valid').isEmail();
+	req.checkBody('password', 'Password is required').notEmpty();
+    //req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+    let errors = req.validationErrors();
 
-    // Save the user to database
-    newUser.save(err => {
-        if(err) throw err;
-        console.log('A new User Saved to Database!');
-        res.redirect('/signin');
-    });
+    if(errors) {
+        console.log(errors);
+        res.render('registration', { errors: errors });
+    }
+    else {
+        // create a new user object as like your user schema
+        let newUser = new User({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password,
+            createdAt: Date.now()
+        });
+
+        // Save the user to database
+        newUser.save(err => {
+            if(err) throw err;
+            console.log('A new User Saved to Database!');
+            req.flash('success_msg', 'You are registered and can now signin!');
+            res.redirect('/signin');
+        });
+    }
 });
 
 // show sign in form
@@ -127,6 +174,7 @@ app.get('/profile', (req, res)=> {
 
 app.get('/logout', function(req, res) {
     req.logout();
+    req.flash('success_msg', 'You are logged out');
     res.redirect('/signin');
 });
 
