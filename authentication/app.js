@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 const bodyParser = require("body-parser");
 const path = require("path");
+const session = require('express-session');
 
 // add mongoose package
 const mongoose = require('mongoose');
@@ -31,6 +32,16 @@ app.use(express.static(__dirname + '/public'));
 
 // using body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: 'arifisaspy',
+    cookie: {
+        maxAge: 864001000 //  1 day
+    },
+    resave: false,
+    saveUninitialized: true
+}));
+
 /*  PASSPORT USE  */
 app.use(passport.initialize());
 app.use(passport.session());
@@ -94,6 +105,29 @@ app.post('/signin', passport.authenticate('local', { failureRedirect: '/signin' 
 // homepage after successful signin
 app.get('/homepage', (req, res)=> {
     res.send('You have access!');
+});
+
+// facebook auth routes to apply facebook for login
+// Send our user to Facebook to authenticate
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// callback gacebook auth when they call u back
+// Facebook sends our user back to our application here with token and profile information
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { 
+    successRedirect : '/profile',
+    failureRedirect: '/signin' 
+ }
+));
+
+// profile page
+app.get('/profile', (req, res)=> {
+    res.render('profile', { user: req.user }); //if any user exist
+});
+
+
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/signin');
 });
 
 // listen the server 

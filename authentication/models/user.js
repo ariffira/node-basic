@@ -10,7 +10,11 @@ const userSchema = new Schema({
     lastname: String,
     email: String,
     password: String,
-    createdAt: Date
+    createdAt: Date,
+    fb_id: String,
+    fb_token: String,
+    fb_email: String,
+    fb_name: String
 });
 
 // make new user Schema as a model for use

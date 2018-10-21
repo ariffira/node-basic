@@ -14,7 +14,7 @@
     "body-parser": "*",
     "cookie-parser": "*",
     "express": "*",
-    "express-session": "*",
+    "express-session": "^1.15.6",
     "hbs": "*",
     "mongoose": "*",
     "passport": "*",
