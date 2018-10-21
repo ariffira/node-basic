@@ -1,6 +1,5 @@
 // add mongoose package
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 // add mongoose Schema object
 const Schema = mongoose.Schema;

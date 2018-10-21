@@ -2,11 +2,14 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5001;
 const bodyParser = require("body-parser");
-const hbs = require("hbs");
 const path = require("path");
 
 // add mongoose package
 const mongoose = require('mongoose');
+
+// configuration passport files 
+const passport = require('passport');
+require('./config/passport')(passport); // pass passport for configuration
 
 /**
  * all models add here
@@ -28,25 +31,9 @@ app.use(express.static(__dirname + '/public'));
 
 // using body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-
-/*  PASSPORT SETUP  */
-
-const passport = require('passport');
+/*  PASSPORT USE  */
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get('/success', (req, res) => res.send("Welcome "+req.query.username+"!!"));
-app.get('/error', (req, res) => res.send("error logging in"));
-
-passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
-});
-
-passport.deserializeUser(function(id, cb) {
-    User.findById(id, function(err, user) {
-        cb(err, user);
-    });
-});
 
 /**
  * All routes
@@ -80,7 +67,8 @@ app.get('/signin', (req, res)=> {
   res.render('signin', { pageTitle: "Sign-in page"});
 });
 
-// post signin data and give access
+/* // post signin data and give access
+// Without passport
 app.post('/signin', (req, res)=> {
   let email = req.body.email;
   let password = req.body.password;
@@ -95,6 +83,12 @@ app.post('/signin', (req, res)=> {
         res.redirect('/signin');
       }
     });
+}); */
+
+
+// post signin data and give access Using PASSPORT-Local
+app.post('/signin', passport.authenticate('local', { failureRedirect: '/signin' }), (req, res)=> {
+    res.redirect('/homepage');
 });
 
 // homepage after successful signin

@@ -11,7 +11,6 @@
   "author": "arif",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "body-parser": "*",
     "cookie-parser": "*",
     "express": "*",
@@ -20,7 +19,7 @@
     "mongoose": "*",
     "passport": "*",
     "passport-facebook": "*",
-    "passport-local": "*"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "*"
