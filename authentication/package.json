@@ -12,13 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "*",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "*",
     "express": "*",
-    "express-session": "*",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.0",
+    "hbs": "*",
     "mongoose": "*",
     "passport": "*",
     "passport-facebook": "*",
-    "passport-local": "*"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "*"
