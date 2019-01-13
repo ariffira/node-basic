@@ -1,0 +1,21 @@
+{
+  "name": "fileupload",
+  "version": "1.0.0",
+  "description": "fileupload multer jimp arif",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "hbs": "*",
+    "jimp": "*",
+    "multer": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "author": "Md Ariful Islam",
+  "license": "ISC"
+}

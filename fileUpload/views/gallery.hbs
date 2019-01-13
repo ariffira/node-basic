@@ -1,0 +1,8 @@
+<h2>Gallery</h2>
+{{#if images}}
+{{#each images}}
+<img src="/upload/images/{{filename}}" width="300" height="300" /><br>
+{{/each}}
+{{else}}
+No images
+{{/if}}

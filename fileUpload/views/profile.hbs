@@ -1,0 +1,16 @@
+<h2>Profile page</h2>
+<form action="/pic_upload" method="post" enctype="multipart/form-data">
+  Upload your Picture: <input type="file" name="profile_pic" />
+  <button type="submit">Upload</button>
+</form>
+
+<h2>Gallery page</h2>
+<form action="/pics_upload" method="post" enctype="multipart/form-data">
+  Upload Multiple: <input type="file" name="all_pic" multiple/>
+  <button type="submit">Upload All</button>
+</form>
+
+{{#if imagePath}}
+<img src={{imagePath}} width="300" height="300">
+{{/if}}
+
