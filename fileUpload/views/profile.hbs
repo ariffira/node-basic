@@ -10,7 +10,17 @@
   <button type="submit">Upload All</button>
 </form>
 
+<h2>Pdf Upload</h2>
+<form action="/pdf_upload" method="post" enctype="multipart/form-data">
+  Upload Pdf file: <input type="file" name="myPdf" />
+  <button type="submit">Upload Pdf</button>
+</form>
+
 {{#if imagePath}}
-<img src={{imagePath}} width="300" height="300">
+<img src="{{imagePath}}" width="300" height="300" />
+{{/if}}
+
+{{#if pdfFile}}
+  <a href="{{pdfFile}}">Download PDF</a>
 {{/if}}
 

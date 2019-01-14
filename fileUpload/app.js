@@ -11,7 +11,7 @@ const multer = require("multer");
 
 // set the template engine views
 app.set('views', path.join(__dirname + '/views'));
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs');
 
 // set public folder for static files css, images
 app.use(express.static(__dirname + '/public'));
@@ -72,11 +72,29 @@ app.get('/profile/:imageName', (req, res)=> {
 });
 
 // file upload gallery for multiple
-app.all('/pics_upload', upload.array('all_pic', 3), (req, res) => {
+app.all('/pics_upload', upload.array('all_pic'), (req, res) => {
     let fileArray = req.files;
     res.render('gallery', {
         images: fileArray
     });
+});
+
+app.all('/pdf_upload', upload.single('myPdf'),(req, res) => {
+    const fileExtension = path.extname(req.file.originalname);
+    const pdfFile = '/upload/images/' + req.file.filename;
+    //console.log(fileExtension);
+    if(fileExtension =='.pdf') {
+        res.render('profile', {
+            pdfFile: pdfFile
+        });
+    }
+    else {
+        const pdfPath = req.file.path;
+        fs.unlink(pdfPath, err => {
+            if(err) throw err;
+            res.send('wrong file! please upload pdf file');
+        });
+    }
 });
 
 app.listen(PORT, ()=> {
