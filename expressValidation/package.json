@@ -1,0 +1,24 @@
+{
+  "name": "expressvalidation",
+  "version": "1.0.0",
+  "description": "Test express validation",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "expressjs",
+    "express validation"
+  ],
+  "dependencies": {
+    "express": "*",
+    "hbs": "*",
+    "body-parser": "*",
+    "express-validator": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "author": "md ariful islam",
+  "license": "ISC"
+}

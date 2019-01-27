@@ -1,0 +1,44 @@
+<h1>Express Validation Test</h1>
+
+{{#if errors }} 
+    <div class="alert alert-danger">
+       <strong>Invalid:</strong>
+        <ul>
+            {{#each errors }}
+                <li>{{ this.msg }}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}
+
+<form action="/create" method="POST">
+   <div class="form-group">
+       <div class="col-md-6">
+           <label>Username: </label>
+           <input type="text" class="form-control" name="username">
+       </div>
+   </div>
+   <div class="form-group">
+       <div class="col-md-6">
+           <label>Email: </label>
+           <input type="email" class="form-control" name="email">
+       </div>
+   </div>
+   <div class="form-group">
+       <div class="col-md-6">
+           <label>Password: </label>
+           <input type="password" class="form-control" name="password">
+       </div>
+   </div>
+   <div class="form-group">
+       <div class="col-md-6">
+           <label>Confirm password: </label>
+           <input type="password" class="form-control" name="confirm_password">
+       </div>
+   </div> 
+   <div class="form-group">
+       <div class="col-md-6">
+           <button type="submit" class="btn btn-success">Test Validation</button>
+       </div>
+   </div>   
+</form>

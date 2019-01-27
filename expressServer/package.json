@@ -1,0 +1,21 @@
+{
+  "name": "expressserver",
+  "version": "1.0.0",
+  "description": "nodejs server code using expressjs, nodemon and packagejson general config",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "expressjs",
+    "server"
+  ],
+  "dependencies": {
+    "express": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "author": "md ariful islam",
+  "license": "ISC"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "expressvalidation",
+  "version": "1.0.0",
+  "description": "express server code with hbs views and static folder",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "expressjs",
+    "hbs"
+  ],
+  "dependencies": {
+    "express": "*",
+    "hbs": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "author": "md ariful islam",
+  "license": "ISC"
+}

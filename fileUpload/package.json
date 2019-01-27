@@ -10,7 +10,6 @@
   "dependencies": {
     "express": "*",
     "hbs": "*",
-    "jimp": "*",
     "multer": "*"
   },
   "devDependencies": {
