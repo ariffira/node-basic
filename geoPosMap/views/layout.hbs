@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #mapContainer {
+        width: 600px;
+        height: 600px;
+      }
+    </style>
+    <title>Express Google map data</title>
+</head>
+<body>
+    <div class="container">
+        {{{body}}}
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+    // Initialize the platform object:
+    var platform = new H.service.Platform({
+    'app_id': 'lGttJjhwHq8CUs0Q0Pss',
+    'app_code': 'CJLj2pD2GaYb7jUm-P9hDA'
+    });
+     console.log(platform)
+    // Obtain the default map types from the platform object
+    var maptypes = platform.createDefaultLayers();
+
+    // Instantiate (and display) a map object:
+    var map = new H.Map(
+    document.getElementById('mapContainer'),
+    maptypes.normal.map,
+    {
+        zoom: 10,
+        center: { lng: 13.4, lat: 52.51 }
+    });
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

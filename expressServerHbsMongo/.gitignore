@@ -1,0 +1,8 @@
+# ignore npm dependency files for git
+node_modules
+
+# ide file
+.vscode/
+
+
+

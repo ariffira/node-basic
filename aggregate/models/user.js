@@ -13,6 +13,8 @@ const userSchema = new Schema({
     website: String,
     phone: String,
     salary: String,
+    job_title: String,
+    image: String,
     createdAt: Date
 });
 

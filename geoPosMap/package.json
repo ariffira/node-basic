@@ -1,0 +1,22 @@
+{
+  "name": "geopos",
+  "version": "1.0.0",
+  "description": "Storing geo positioning data using google map and mongoose",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "expressjs",
+    "hbs"
+  ],
+  "dependencies": {
+    "express": "*",
+    "hbs": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "author": "md ariful islam",
+  "license": "ISC"
+}

@@ -1,12 +1,19 @@
-<h1>Express Validation Test</h1>
+<h1>Express Validation Test: Sign-Up Form</h1>
 
 {{#if errors }} 
     <div class="alert alert-danger">
-       <strong>Invalid:</strong>
+       <strong>Invalid Data:</strong>
         <ul>
             {{#each errors }}
-                <li>{{ this.msg }}</li>
+                <li>{{ msg }}</li>
             {{/each}}
+        </ul>
+    </div>
+{{else if success}}
+    <div class="alert alert-success">
+       <strong>Congrates:</strong>
+        <ul>
+            {{success}}
         </ul>
     </div>
 {{/if}}
@@ -21,7 +28,7 @@
    <div class="form-group">
        <div class="col-md-6">
            <label>Email: </label>
-           <input type="email" class="form-control" name="email">
+           <input type="text" class="form-control" name="email">
        </div>
    </div>
    <div class="form-group">

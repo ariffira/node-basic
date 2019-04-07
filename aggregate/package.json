@@ -10,9 +10,12 @@
   "author": "arif",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "express": "*",
-    "mongoose": "*",
-    "faker": "*"
+    "faker": "*",
+    "hbs": "^4.0.1",
+    "mongoose": "*"
   },
   "devDependencies": {
     "nodemon": "*"
