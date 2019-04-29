@@ -3,7 +3,10 @@ const indexController = require('../controller/indexController');
 // first Test case suite
 test('test01: test summation result', ()=> {
     expect(indexController.sum(1,2)).toBe(3);
+    expect(indexController.sum(-1, 6)).toBe(5);
+    expect(indexController.sum('1', 4)).toBe(5);
     expect(indexController.sum(2,4)).toBeNumber();
+
 });
 
 // test 02
