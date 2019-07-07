@@ -6,7 +6,7 @@ const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 
 // connect mongoose
-mongoose.connect('mongodb://test:test1234@ds129914.mlab.com:29914/fbw4', { useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/usermanagementapp', { useNewUrlParser: true})
 .then(()=>{
     console.log('MONGO DB Connected.....27017 port');
 })
@@ -14,6 +14,7 @@ mongoose.connect('mongodb://test:test1234@ds129914.mlab.com:29914/fbw4', { useNe
     console.log(' Errors to connect database. bad programmer');
 })
 
+// setting body-parser
 app.use(bodyParser.urlencoded({
     extended: false
 }));

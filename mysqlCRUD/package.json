@@ -1,0 +1,24 @@
+{
+  "name": "expressmysql",
+  "version": "1.0.0",
+  "description": "express server with mysql db",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "expressjs",
+    "hbs"
+  ],
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "*",
+    "hbs": "*",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  },
+  "author": "md ariful islam",
+  "license": "ISC"
+}

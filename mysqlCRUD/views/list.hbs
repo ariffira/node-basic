@@ -1,0 +1,19 @@
+<h1>JOIN Tables</h1>
+<table>
+    <tr>
+        <th>Customer Name</th>
+        <th>Address</th>
+        <th>product</th>
+        <th>Price</th>
+        <th>Email</th>
+    </tr>
+        {{#each data}}
+          <tr>
+          <td>{{customer_name}}</td>
+          <td>{{address}}</td>
+          <td>{{product_name}}</td>
+          <td>{{price}}</td>
+          <td>{{email}}</td>
+          </tr>
+        {{/each}}
+</table>
