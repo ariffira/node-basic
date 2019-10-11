@@ -2,10 +2,12 @@
 
 node js basics tutorials code with MongoDB and ExpressJS
 
-**#(MEN stack):**
+**#(MERN stack):**
 
 M- MongoDB
 
 E-Express
+
+R-Reactjs
 
 N-Nodejs
