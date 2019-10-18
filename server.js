@@ -1,6 +1,6 @@
 const http = require('http');
 const myHost = 'localhost'; //127.0.0.1
-const portNumber = 5000;
+const portNumber = 5000 || process.env.PORT;
 
 // create a server with http
 const server = http.createServer(function (request, response) {
