@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const myRoutes = require('./routes/myRoutes.js');
-
+const PORT = process.env.PORT || 3000;
 // express static folder for assets (css, images, js, libs and uploads)
 app.use(express.static(__dirname + '/public'));
 
@@ -47,4 +47,4 @@ app.get('/user/:userId', function (req, res) {
 app.use('/myRoutes', myRoutes);
 
 // app.listen(3000);
-app.listen(3000, () => console.log('My App listening on port 3000! Express is awesome!!!'));
+app.listen(PORT, () => console.log('My App listening on port 3000! Express is awesome!!!'));
