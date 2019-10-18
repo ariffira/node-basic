@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const todosRouter = require('./routes/todos');
-
+const PORT = process.env.PORT || 5000;
 
 var app = express();
 
@@ -57,6 +57,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(5000);
+app.listen(PORT);
 
 module.exports = app;
